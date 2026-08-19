@@ -14,7 +14,7 @@ export default function Home() {
           <span className="font-medium leading-none text-muted">
             Product Designer
           </span>
-          <span className="mt-4 inline-flex items-center gap-2 font-mono text-[12px] uppercase tracking-[0.08em] text-faint">
+          <span className="mt-4 inline-flex items-center gap-2 whitespace-nowrap font-mono text-[10px] uppercase tracking-[0.06em] text-faint sm:text-[12px] sm:tracking-[0.08em]">
             <span className="relative flex h-1.5 w-1.5">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--accent)] opacity-60" />
               <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[var(--accent)]" />
