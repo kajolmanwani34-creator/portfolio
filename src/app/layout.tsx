@@ -18,11 +18,11 @@ const siteUrl = "https://kajoldavda.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: "Kajol Davda — Product Designer",
+  title: "Kajol Davda · Product Designer",
   description:
     "Product designer working on consumer brands and e-commerce. Case studies, craft and contact.",
   openGraph: {
-    title: "Kajol Davda — Product Designer",
+    title: "Kajol Davda · Product Designer",
     description:
       "Product designer working on consumer brands and e-commerce. Case studies, craft and contact.",
     url: siteUrl,
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Kajol Davda — Product Designer",
+    title: "Kajol Davda · Product Designer",
     description:
       "Product designer working on consumer brands and e-commerce. Case studies, craft and contact.",
   },
