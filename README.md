@@ -28,18 +28,15 @@ Screenshots live in `public/work/` as 1600×1000 (16:10) WebP. To add one, drop 
 in and list it under a project's `previews` array — a project with more than one image
 cycles through them while hovered.
 
-Still to replace:
-- `vitality-physio.svg` is a generated placeholder; no clinic screenshot was supplied yet.
-- `joy-of-life.webp` comes from the exported PDF, which has a few overlapping elements
-  in the hero. A clean PNG capture would look better.
-
-Once no SVGs remain in `public/work/`, the `images` block in `next.config.ts` can go.
+All previews are real screenshots. Nothing in `public/work/` is an SVG any more, so the
+`images` block in `next.config.ts` can be removed whenever you like.
 
 ## Notes
 
 - Dark by default, follows the system preference on first visit, and the toggle in the
   header persists a choice to `localStorage` (applied before paint, so no flash).
-- Hover previews are pointer-and-desktop only; touch and narrow screens skip them.
+- Hover previews run above 1024px on fine pointers. Below that, each row shows its
+  screenshot inline instead, so touch users see the work without hovering.
 - Respects `prefers-reduced-motion`.
 
 ## Deploy

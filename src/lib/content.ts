@@ -28,7 +28,7 @@ export const caseStudies: Project[] = [
     description: "Services, doctors and clinic technology.",
     href: "#",
     tag: "Healthcare",
-    previews: ["/work/vitality-physio.svg"],
+    previews: ["/work/vitality-physio.webp"],
   },
 ];
 

@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import {
   AnimatePresence,
@@ -20,12 +20,14 @@ const EDGE = 20;
 export function ProjectList({ projects }: { projects: Project[] }) {
   const [active, setActive] = useState<number | null>(null);
   const [frame, setFrame] = useState(0);
+  // Unique per list so the highlight never animates between two lists.
+  const id = useId();
   const [canPreview, setCanPreview] = useState(false);
   const listRef = useRef<HTMLDivElement>(null);
 
   // Previews are a pointer affordance — skip them on touch and on narrow screens.
   useEffect(() => {
-    const query = window.matchMedia("(pointer: fine) and (min-width: 1000px)");
+    const query = window.matchMedia("(pointer: fine) and (min-width: 1024px)");
     const sync = () => setCanPreview(query.matches);
     sync();
     query.addEventListener("change", sync);
@@ -78,7 +80,7 @@ export function ProjectList({ projects }: { projects: Project[] }) {
   return (
     <div
       ref={listRef}
-      className="relative flex flex-col gap-7 sm:gap-0"
+      className="relative flex flex-col gap-8 lg:gap-0"
       onMouseMove={handleMove}
       onMouseLeave={() => setActive(null)}
     >
@@ -93,23 +95,37 @@ export function ProjectList({ projects }: { projects: Project[] }) {
             onMouseEnter={() => select(index)}
             onFocus={() => select(index)}
             onBlur={() => setActive(null)}
-            className="group relative -mx-3 flex items-baseline justify-between gap-6 rounded-md px-3 py-2.5 outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] sm:py-3"
+            className="group relative -mx-3 flex flex-col gap-3 rounded-md px-3 py-2.5 outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] lg:py-3"
           >
             {active === index && (
               <motion.span
-                layoutId="project-highlight"
+                layoutId={`highlight-${id}`}
                 className="absolute inset-0 -z-10 rounded-md bg-[var(--bg-subtle)]"
                 transition={{ type: "spring", stiffness: 420, damping: 38 }}
               />
             )}
-            <span className="flex min-w-0 flex-col sm:flex-row sm:items-baseline sm:gap-3">
-              <span className="whitespace-nowrap text-text transition-colors duration-200 group-hover:text-[var(--accent)]">
-                {project.name}
+            <span className="flex items-baseline justify-between gap-6">
+              <span className="flex min-w-0 flex-col lg:flex-row lg:items-baseline lg:gap-3">
+                <span className="whitespace-nowrap text-text transition-colors duration-200 group-hover:text-[var(--accent)]">
+                  {project.name}
+                </span>
+                <span className="text-muted lg:truncate">
+                  {project.description}
+                </span>
               </span>
-              <span className="text-muted sm:truncate">{project.description}</span>
+              <span className="shrink-0 font-mono text-[11px] uppercase tracking-[0.09em] text-faint transition-colors duration-200 group-hover:text-[var(--accent)]">
+                {project.tag}
+              </span>
             </span>
-            <span className="shrink-0 font-mono text-[11px] uppercase tracking-[0.09em] text-faint transition-colors duration-200 group-hover:text-[var(--accent)]">
-              {project.tag}
+            {/* Touch and small screens get the screenshot inline — no hover to reveal it. */}
+            <span className="relative block aspect-[16/10] w-full overflow-hidden rounded-lg border border-[var(--border)] bg-[var(--bg-subtle)] lg:hidden">
+              <Image
+                src={project.previews[0]}
+                alt={`${project.name} screenshot`}
+                fill
+                sizes="(max-width: 700px) 100vw, 640px"
+                className="object-cover"
+              />
             </span>
           </a>
         );
