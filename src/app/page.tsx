@@ -30,9 +30,9 @@ export default function Home() {
           <span className="mb-5 block font-medium sm:mb-6">Today</span>
           <p className="text-muted">
             I&rsquo;m a product designer looking for an internship or an
-            entry-level role. I like working on consumer brands and e-commerce —
-            the kind of product where a small change in a flow shows up in the
-            numbers the same week.
+            entry-level role. I like working on consumer brands and e-commerce,
+            where a small change in a flow shows up in the numbers the same
+            week.
           </p>
           <p className="mt-4 text-muted">
             I design in{" "}
