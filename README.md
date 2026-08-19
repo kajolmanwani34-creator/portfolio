@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Kajol Davda — Portfolio
 
-## Getting Started
+A minimal, single-page portfolio built with Next.js 16, Tailwind CSS v4 and Motion.
 
-First, run the development server:
+**Direction:** the layout and typographic rhythm follow [emilkowal.ski](https://emilkowal.ski)
+(692px column, 16px base, quiet greys), project rows reveal a screenshot on hover in the
+style of [brianlovin.com/sites](https://brianlovin.com/sites), and a vibrant blue accent
+(`#3d8bff` dark / `#0a6cff` light) carries hover, focus and link states.
+
+## Run it
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Where the content lives
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| What | File |
+| --- | --- |
+| Projects, craft, previews, links | `src/lib/content.ts` |
+| Name, role, bio, Connect copy | `src/app/page.tsx` |
+| Colors, type, motion tokens | `src/app/globals.css` |
+| Page title / OG metadata | `src/app/layout.tsx` |
+| Hover-preview behaviour | `src/components/ProjectList.tsx` |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Screenshots live in `public/work/` as 1600×1000 (16:10) WebP. To add one, drop the file
+in and list it under a project's `previews` array — a project with more than one image
+cycles through them while hovered.
 
-## Learn More
+Still to replace:
+- `vitality-physio.svg` is a generated placeholder; no clinic screenshot was supplied yet.
+- `joy-of-life.webp` comes from the exported PDF, which has a few overlapping elements
+  in the hero. A clean PNG capture would look better.
 
-To learn more about Next.js, take a look at the following resources:
+Once no SVGs remain in `public/work/`, the `images` block in `next.config.ts` can go.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Notes
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Dark by default, follows the system preference on first visit, and the toggle in the
+  header persists a choice to `localStorage` (applied before paint, so no flash).
+- Hover previews are pointer-and-desktop only; touch and narrow screens skip them.
+- Respects `prefers-reduced-motion`.
 
-## Deploy on Vercel
+## Deploy
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Push to a Git repo and import it on Vercel — the defaults work as-is. Update `siteUrl`
+in `src/app/layout.tsx` to the production domain before launch.
